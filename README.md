@@ -1,7 +1,7 @@
 # vim-rainbows
 
 Vim runtime files for my own language,
-[Rainbows](https://github.com/nfischer/rainbows).
+[Rainbows](https://github.com/nfischer/rainbows-lang).
 
 > All the power of the rainbow, brought right to vim
 
@@ -17,7 +17,7 @@ Plugin 'nfischer/vim-rainbows'
 Rainbows is all about coding in color! Now you can do that, all from within vim!
 
 To get started, visit the [live Rainbows
-demo](https://nfischer.github.io/rainbows) and download the files (should be a
+demo](https://nfischer.github.io/rainbows-lang) and download the files (should be a
 `.rain` and `.raint`) file.
 
 Next, open up the `.rain` file and start hacking away!
@@ -54,7 +54,7 @@ mode on top of the token you want to paint
 
 ### Annoyed this doesn't do type inference for you?
 
-If you have [Rainbows](https://github.com/nfischer/rainbows) installed, you can
+If you have [Rainbows](https://github.com/nfischer/rainbows-lang) installed, you can
 specify the path to the type inferencer, and it'll run after every save:
 
 ```viml
