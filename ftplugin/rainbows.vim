@@ -123,6 +123,7 @@ function! s:SaveTypeDict()
 endfunction
 
 augroup RainbowFileStuff
-  au BufEnter     *.rain call s:LoadTypeDict()
+  au!
+  au BufEnter *.rain call s:LoadTypeDict()
   au BufWritePost *.rain call s:SaveTypeDict()
 augroup END
