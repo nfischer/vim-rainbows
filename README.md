@@ -3,7 +3,7 @@
 Vim runtime files for my own language,
 [Rainbows](https://github.com/nfischer/rainbows-lang).
 
-> All the power of the rainbow, brought right to vim
+> The power of vim meets the power of the rainbow
 
 ## Installation
 
@@ -16,31 +16,25 @@ Plugin 'nfischer/vim-rainbows'
 
 Rainbows is all about coding in color! Now you can do that, all from within vim!
 
-To get started, visit the [live Rainbows
-demo](https://nfischer.github.io/rainbows-lang) and download the files (should be a
-`.rain` and `.raint`) file.
+To get started, visit the [live demo](https://nfischer.github.io/rainbows-lang)
+and download the files (this should be a `.rain` and `.raint` file).
 
 Next, open up the `.rain` file and start hacking away!
 
 ## What does this do for me?
 
-Literal values will be highlighted by default. Try typing `12`, `12.1`, `"foo"`,
-and other literal values right out of the box in any `.rain` file!
+ - type coloring: just like the live coding environment, this will color your
+   identifiers and literals based on what type they are.
+ - type inference: if you have the type inferencer installed (see below), then
+   this will automatically run that after each save.
+ - custom coloring: don't like what types the inferencer chose? Just custom
+   color the identifiers with a few key presses (see below). Changes will
+   persist between vim sessions!
 
-Also, if you have a `.raint` file, then inferred identifiers will also work. So
-if you ever see `var foo = 12`, then both the `12` and `foo` will be blue
-
-Now you can start custom-coloring variables to get different behavior!
-
- * Type out `grb` to paint an identifier blue. If you save your file and reopen
-   it, the change will persist!
- * Try `grr` to paint the same identifier red now!
- * Use `grD` to go back to the default coloring
-
-In general, here are the allowed commands, which should all be entered in normal
+Here are the allowed commands, which should all be entered in normal
 mode on top of the token you want to paint
 
-| command | color/type        |
+| key map | color/type        |
 |:-------:|:-----------------:|
 | `grr`   | red/string        |
 | `grb`   | blue/int          |
@@ -52,15 +46,19 @@ mode on top of the token you want to paint
 
 ## But wait, there's more!
 
-### Annoyed this doesn't do type inference for you?
+### Want this to do type inference?
 
-If you have [Rainbows](https://github.com/nfischer/rainbows-lang) installed, you can
-specify the path to the type inferencer, and it'll run after every save:
+If you have [Rainbows](https://github.com/nfischer/rainbows-lang) installed, you
+can specify the path to the type inferencer, and it'll run after every save:
 
 ```viml
 " In .vimrc
 let g:rainbows#inferencer_path = '/path/to/rainbows/bin/rain-infer.js'
 ```
+
+### Want the inferencer to run in the background?
+
+Try out [neovim](https://github.com/neovim/neovim)
 
 ### Don't like the default colors in commandline vim?
 
@@ -95,11 +93,9 @@ Try it out in `gvim` to get my favorite shade of Rainbows colors! **Cool!**
 
 ## Coming soon...
 
- * Async support for neovim users (so we can run the inferencer in the
+ - [x] Async support for neovim users (so we can run the inferencer in the
    background, then update the UI when it's done)
- * Async support for neovim users (so we can run the inferencer in the
-   background, then update the UI when it's done)
- * Unit tests... yeah right
+ - [ ] Unit tests... yeah right
 
 ## Want something more?
 
