@@ -1,0 +1,9 @@
+{
+  "name": "vim-rainbows",
+  "description": "Vim runtime files for the Rainbows language",
+  "author": "Nate Fischer",
+  "repository": {"type": "git", "url": "git://github.com/nfischer/vim-rainbows"},
+  "dependencies": {
+    "webapi-vim": {"type": "git", "url": "git://github.com/mattn/webapi-vim"}
+  }
+}
