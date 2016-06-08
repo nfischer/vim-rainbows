@@ -6,8 +6,12 @@ endif
 let b:type_list = [ 'string', 'int', 'float', 'bool', 'list', 'dict' ]
 
 function! g:ColorLiterals()
+  " -------------------------------------------------------------------------
+  " Basic things
+  " -------------------------------------------------------------------------
   syntax match RainbowNormal '\v.'
   syntax region RainbowComment start='\V//' end='\v$' contains=@Spell
+
   " -------------------------------------------------------------------------
   " Literals
   " -------------------------------------------------------------------------
@@ -19,6 +23,12 @@ function! g:ColorLiterals()
   syntax match  Rainbowbool   '\v<(true|false)>'
   syntax region Rainbowlist   start='\v\[' end='\v\]' keepend
   " syntax region Rainbowdict   start='\v\{' end='\v\}' keepend
+
+  " -------------------------------------------------------------------------
+  " Keywords (because these still matter)
+  " -------------------------------------------------------------------------
+  syntax keyword Rainbowkeyword function if else return var break continue
+
 endfunction
 call g:ColorLiterals()
 
@@ -37,5 +47,6 @@ highlight default Rainbowbool   cterm=bold  ctermfg=white   gui=bold  guifg=#D39
 highlight default Rainbowlist   cterm=bold  ctermfg=green   gui=bold  guifg=#00BA00
 highlight default Rainbowdict   cterm=bold  ctermfg=magenta gui=bold  guifg=#CE00CE
 highlight default RainbowNormal ctermfg=lightgrey guifg=lightgrey
+highlight default Rainbowkeyword ctermfg=grey cterm=underline,bold guifg=lightgrey gui=italic
 
 let b:current_syntax = 'rainbows'

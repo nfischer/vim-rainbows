@@ -56,8 +56,6 @@ function! s:AddType(dict, token, type)
   endif
 endfunction
 
-let s:default_key = g:rainbows#default_key
-
 let s:bad_words = [ 'abstract', 'else', 'instanceof', 'super', 'boolean',
 \ 'enum', 'int', 'switch', 'break', 'export', 'interface', 'synchronized',
 \ 'byte', 'extends', 'let', 'this', 'case', 'false', 'long', 'throw', 'catch',
@@ -75,18 +73,15 @@ function! s:Color(token)
   endif
   if l:mychar == ''
     return
-  elseif l:mychar == s:default_key
+  elseif l:mychar == g:rainbows#default_key
     call s:RemoveType(s:tokenMap, a:token)
-    call s:MatchKnownTokens()
-    set modified
-    return
-  endif
-  if !has_key(g:rainbows#custom_map, l:mychar)
+  elseif !has_key(g:rainbows#custom_map, l:mychar)
     echohl ErrorMsg | echo '`' . l:mychar . '` is not a valid char' | echohl NONE
     return
+  else
+    let l:type_name = g:rainbows#custom_map[l:mychar]
+    call s:AddType(s:tokenMap, a:token, l:type_name)
   endif
-  let l:type_name = g:rainbows#custom_map[l:mychar]
-  call s:AddType(s:tokenMap, a:token, l:type_name)
   call s:MatchKnownTokens()
   set modified
 endfunction
@@ -116,10 +111,15 @@ function! s:SaveTypeDict()
   let l:json_str = webapi#json#encode(s:tokenMap)
   call writefile(split(l:json_str, '\n'), l:type_file_name)
   if exists('g:rainbows#inferencer_path')
-    echo 'Loading inferred types...'
-    call system('node ' . g:rainbows#inferencer_path . ' ' . expand('%:p'))
+    if has('nvim') " The future is here, and it's beautiful
+      call jobstart(['node', g:rainbows#inferencer_path, expand('%:p')],
+          \ {'on_exit': 's:LoadTypeDict'})
+    else
+      echo 'Synchronously loading inferred types...'
+      call system('node ' . g:rainbows#inferencer_path . ' ' . expand('%:p'))
+      call s:LoadTypeDict()
+    endif
   endif
-  call s:LoadTypeDict()
 endfunction
 
 augroup RainbowFileStuff
