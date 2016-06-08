@@ -71,9 +71,9 @@ function! s:Color(token)
     echohl ErrorMsg | echo '`' . a:token . '` is not a colorable token' | echohl NONE
     return
   endif
-  if l:mychar == ''
+  if l:mychar ==# ''
     return
-  elseif l:mychar == g:rainbows#default_key
+  elseif l:mychar ==# g:rainbows#default_key
     call s:RemoveType(s:tokenMap, a:token)
   elseif !has_key(g:rainbows#custom_map, l:mychar)
     echohl ErrorMsg | echo '`' . l:mychar . '` is not a valid char' | echohl NONE
@@ -97,7 +97,8 @@ function! s:MatchKnownTokens()
   endfor
 endfunction
 
-exe "nnoremap <buffer> <silent> " . g:rainbows#map_prefix . " :call <SID>Color('<C-R><C-W>')<CR>"
+" visual and normal mode (and operator pending)
+exe "noremap <buffer> <silent> " . g:rainbows#map_prefix . " :<C-u>call <SID>Color('<C-R><C-W>')<CR>"
 
 function! s:LoadTypeDict()
   let l:type_file_name = expand('%:p') . 't'
