@@ -7,10 +7,23 @@ Vim runtime files for my own language,
 
 ## Installation
 
+Using [vim-plug](https://github.com/junegunn/vim-plug):
+
+```viml
+Plug 'mattn/webapi-vim' " This is a dependency
+Plug 'nfischer/vim-rainbows'
+```
+
+Using [vundle](https://github.com/VundleVim/Vundle.vim):
+
 ```viml
 Plugin 'mattn/webapi-vim' " This is a dependency
 Plugin 'nfischer/vim-rainbows'
 ```
+
+Or, check out
+[vim-addon-manager](https://github.com/MarcWeber/vim-addon-manager), which
+should resolve the dependencies for you.
 
 ## How do I use it?
 
