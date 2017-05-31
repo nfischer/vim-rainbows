@@ -73,10 +73,11 @@ let g:rainbows#inferencer_path = '/path/to/rainbows/bin/rain-infer.js'
 
 Try out [neovim](https://github.com/neovim/neovim)
 
-### Don't like the default colors in commandline vim?
+### Don't like the default colors in terminal vim?
 
-Try it out in `gvim` to get my favorite shade of Rainbows colors! **Cool!**
-:sunglasses:
+ - gvim has the full range of terminal colors by default :sunglasses:
+ - `termguicolors`: set this option in neovim or vim 8 and you can get the full
+   power of the rainbow right in your terminal. :art:
 
 ## Customization
 
