@@ -1,3 +1,11 @@
+" TODO(nate): remove this after a few months
+if !exists('*maktaba#json#Format')
+  echohl WarningMsg
+  echom 'google/vim-maktaba is now a required dependency for nfischer/vim-rainbows'
+  echohl NONE
+  finish
+endif
+
 if !exists('g:rainbows#map_prefix')
   " 'go rainbow'
   let g:rainbows#map_prefix = 'gr'
@@ -100,21 +108,25 @@ endfunction
 " visual and normal mode (and operator pending)
 exe "noremap <buffer> <silent> " . g:rainbows#map_prefix . " :<C-u>call <SID>Color('<C-R><C-W>')<CR>"
 
+function! s:LoadTypeDictWrapper(job_id, data, event) abort
+  call s:LoadTypeDict()
+endfunction
+
 function! s:LoadTypeDict()
   let l:type_file_name = expand('%:p') . 't'
   let l:json_str = join(readfile(l:type_file_name), '\n')
-  let s:tokenMap = webapi#json#decode(l:json_str)
+  let s:tokenMap = maktaba#json#Parse(l:json_str)
   call s:MatchKnownTokens()
 endfunction
 
 function! s:SaveTypeDict()
   let l:type_file_name = expand('%:p') . 't'
-  let l:json_str = webapi#json#encode(s:tokenMap)
+  let l:json_str = maktaba#json#Format(s:tokenMap)
   call writefile(split(l:json_str, '\n'), l:type_file_name)
   if exists('g:rainbows#inferencer_path')
     if has('nvim') " The future is here, and it's beautiful
       call jobstart(['node', g:rainbows#inferencer_path, expand('%:p')],
-          \ {'on_exit': 's:LoadTypeDict'})
+          \ {'on_exit': function('s:LoadTypeDictWrapper')})
     else
       echo 'Synchronously loading inferred types...'
       call system('node ' . g:rainbows#inferencer_path . ' ' . expand('%:p'))
