@@ -38,7 +38,7 @@ call g:ColorLiterals()
 
 " Emphasize the rainbow!
 
-highlight default RainbowComment            ctermfg=cyan              guifg=cyan
+highlight link RainbowComment Comment
 
 highlight default Rainbowstring cterm=bold  ctermfg=red     gui=bold  guifg=#FF4F4F
 highlight default Rainbowint    cterm=bold  ctermfg=blue    gui=bold  guifg=#0084FF
